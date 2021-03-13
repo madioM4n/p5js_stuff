@@ -25,7 +25,8 @@ var sketch = function(f){
 	f.draw = function(){
 		f.canv = f.createCanvas(cSize, cSize);
 		f.canv.position(f.px, f.py);
-		f.background(f.col);
+		f.tint(f.col);
+		f.image(cp, 0, 0, cSize, cSize);
 		f.canv.parent(f.otherDiv);
 
 	}
@@ -43,9 +44,12 @@ var bSlider;
 var cSize;
 
 
+var cp;
+
 function setup() {
 	noCanvas();
-
+	cp = createCapture(VIDEO);
+	cp.hide();
 	var mainDiv = createDiv();
 	mainDiv.parent('#main');
 
