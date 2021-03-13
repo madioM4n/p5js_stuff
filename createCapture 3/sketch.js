@@ -23,7 +23,6 @@ var sketch = function(f){
 	}
 
 	f.draw = function(){
-		//per ogni instanza aggiorno le caratteristiche tramite il draw principale
 		f.canv = f.createCanvas(cSize, cSize);
 		f.canv.position(f.px, f.py);
 		f.background(f.col);
@@ -65,7 +64,7 @@ function setup() {
 	var addBtn = createButton('Aggiungi');
 	addBtn.parent(mainDiv);
 	addBtn.class('controls');
-	addBtn.mouseClicked(addInstance);//NON METTERE LE PARENTESI
+	addBtn.mouseClicked(addInstance);
 
 	var p = createElement('span','muovi gli slider per cambiare colore, quindi premi Aggiungi');
 	p.parent(mainDiv);
@@ -78,12 +77,9 @@ function setup() {
 function draw(){
 
 	instances[counter].col = color(rSlider.value(), gSlider.value(), bSlider.value());
-	//la dimensione dei canvas si aggiorna di continuo
-	//permettendo di ridimensionare la finestra, aggiornando anche 
-	//la posizione di tutti i canvas
-
+	
 	cSize = windowWidth/4;
-	//scorro tutte le instanze e tengo aggiornate le rispettive posizioni
+	
 	for (var j = 0; j < instances.length; j++) {
 		instances[j].px = cSize*instances[j].c;
 		instances[j].py = (cSize*instances[j].r) + 60;
@@ -94,21 +90,3 @@ function addInstance(){
 	instances.push(new p5(sketch));//creo istanza
 	counter++;
 }
-
-/*
-dentro una istanza, mouseClicked non
-supporta chiamate a funzioni,
-maintere funzione dentro mouseClicked.
-addBtn.mouseClicked(function(){
-			ES.
-		var dom = selectAll('.toDel');
-		//rimuovo tutti gli sliders e il pulsante dalla istanza corrente
-		for (var i = 0; i < dom.length; i++) {
-			dom[i].remove();
-		}
-		instances.push(new p5(sketch));//creo istanza
-	});
-AGGIORNAMENTO.
-RICORDATI DI NON METTERE LE PARENTESI TONDE DOPO LA FUNZIONE DENTRO mouseClicked
-O IN QUALSIASI ALTRA CALLBACK
-*/
